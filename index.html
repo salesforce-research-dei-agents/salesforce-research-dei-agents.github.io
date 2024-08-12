@@ -134,7 +134,7 @@
             <div class="col-md-10 col-lg-8">
                 <figure style="text-align:center;">
                     <img src="img/swecommittee_teaser.jpg" width="100%">
-                    <figcaption><b>Figure:</b> Different SWE agents (Aider, Moatless, Agentless, OpenDevin) resolve very different sets of issues (the colored girds), despite having similar resolve rates (b). Our proposed <b>DEI</b> Committee takes candidates patches and tries to select the best, oracle choice (c), improving the resolve rate significantly to be better than any single agent in the committee.</figcaption>
+                    <figcaption><b>Figure 1:</b> Different SWE agents (Aider, Moatless, Agentless, OpenDevin) resolve very different sets of issues (the colored girds), despite having similar resolve rates (b). Our proposed <b>DEI</b> Committee takes candidates patches and tries to select the best, oracle choice (c), improving the resolve rate significantly to be better than any single agent in the committee.</figcaption>
                 </figure>
             </div>
         </div>
@@ -162,7 +162,7 @@
 
                 <figure>
                     <img src="img/swecommittee_pipeline.jpg" alt="Framework Overview" style="width:100%;">
-                    <figcaption><b>Figure:</b> Framework Overview. <b>DEI</b> first examines the code base before and after a candidate patch, along with other relevant contexts. Then, it generates an explanation for the issue, the context, and the patch and tries to justify the patch. With its own explanation, it scores the candidate patches and picks the top-scoring ones as more likely to be correct.</figcaption>
+                    <figcaption><b>Figure 2:</b> Framework Overview. <b>DEI</b> first examines the code base before and after a candidate patch, along with other relevant contexts. Then, it generates an explanation for the issue, the context, and the patch and tries to justify the patch. With its own explanation, it scores the candidate patches and picks the top-scoring ones as more likely to be correct.</figcaption>
                 </figure>
 
                 <h5 class="mt-4 mb-2">Step 1: Input Construction</h5>
@@ -222,7 +222,7 @@
                         </div>
                     </div>
                     <p class="text-justify" style="margin-top: 10px;">
-                        <b>Figure:</b> How different metrics change as more candidate solutions are involved. In all 4 scenarios, there is a huge gap between Union@k and Average@k.
+                        <b>Figure 3:</b> How different metrics change as more candidate solutions are involved. In all 4 scenarios, there is a huge gap between Union@k and Average@k.
                     </p>
                 </div>
 
@@ -244,7 +244,7 @@
 
                 <h4 class="mt-4 mb-2">Research Question 1: How diverse are LLM-based SWE agents?</h4>
                 <p class="text-justify">
-                    To answer this question, we report the "@k" metrics of 10 different agents and 10 runs of single agents in <b>Figure 1</b>. Several observations can be made about the results:
+                    To answer this question, we report the "@k" metrics of 10 different agents and 10 runs of single agents in <b>Figure 3</b>. Several observations can be made about the results:
                     <b>SWE agents resolve very different sets of issues across agents and agent runs. Their full potential is far from fully released.</b>
                     In all four subfigures, the gap between Union@k and Average@k, as well as between Average@k and Intersect@k, is large. 
                     As k—the number of candidates—gets larger, the gap also gets larger. In fact, Union@k is always more than 50% larger than Average@k for k≥5.
@@ -261,7 +261,7 @@
             <!-- Leaderboard Section -->
     <div class="container" id="leaderboard" style="background: #e5effc">
         <div class="col-md-12">
-            <h5>SWE-Bench Lite Results</h5>
+            <h5>Table 1: SWE-Bench Lite Results</h5>
             <p class="text-justify" style="font-size: 15px;">
                 (Last Updated: 2024-08-12)
             </p>
@@ -480,7 +480,7 @@
         <div class="col-md-12 col-lg-10">
     <h4 class="mt-4 mb-2">Research Question 2: How much does DEI help?</h4>
     <p class="text-justify">
-        We apply <b>DEIBASE</b> to the candidates in <b>Figure 1</b> as they are added to the group. Our findings are:
+        We apply <b>DEIBASE</b> to the candidates in <b>Figure 3</b> as they are added to the group. Our findings are:
     </p>
     <p class="text-justify">
         <b>DEIBASE helps in most cases.</b> For most values of k in all subfigures, we observe a significant improvement of n@k over Average@k, indicating that <b>DEIBASE</b> selects correct candidates much better than a random baseline.

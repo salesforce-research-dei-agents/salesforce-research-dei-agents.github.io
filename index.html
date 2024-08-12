@@ -232,14 +232,14 @@
                 </p>
                 <ul>
                     <li><b>Resolve rate:</b> Measures how good a SWE agent is. It is defined as the percentage of issues resolved by the agent. We measure both single SWE agents and <b>DEI</b> with it to see how much <b>DEI</b> helps.</li>
-                    <li><b>Union@k:</b> Measures the <i>best case</i> performance had the agents been perfectly consistent by counting the number of problems solved by any of the $k$ solutions.</li>
-                    <li><b>Intersect@k:</b> Measures the <i>worst case</i> performance by computing the number of problems solved by all $k$ solutions.</li>
+                    <li><b>Union@k:</b> Measures the <i>best case</i> performance had the agents been perfectly consistent by counting the number of problems solved by any of the k solutions.</li>
+                    <li><b>Intersect@k:</b> Measures the <i>worst case</i> performance by computing the number of problems solved by all k solutions.</li>
                     <li><b>Average@k:</b> Measures the <i>average case</i> performance by computing the average number of problems solved. It corresponds to the case of a random reward function that uniformly samples a candidate solution for each problem.</li>
-                    <li><b>n@k:</b> Measures the performance of any reranking mechanism by computing the number of problems solved by $k$ chosen submissions from a given set of samples.</li>
+                    <li><b>n@k:</b> Measures the performance of any reranking mechanism by computing the number of problems solved by k chosen submissions from a given set of samples.</li>
                 </ul>
 
                 <p class="text-justify">
-                    Our research questions can be answered by the gaps between these metrics. <b>Union@k - Intersect@</b> measures how diverse the agents are, while <b>n@k - Average@k</b> measures how much <b>DEI</b> helps in selecting the correct candidate from these agents. Note that the order -- in which different runs are added -- matters as $k$ gets larger, especially when the $k$ candidate solutions come from $k$ different agents. In our experiments, we add candidate solutions from the single agent according to the order they are generated, while we add solutions from different agents in a fixed order.
+                    Our research questions can be answered by the gaps between these metrics. <b>Union@k - Intersect@</b> measures how diverse the agents are, while <b>n@k - Average@k</b> measures how much <b>DEI</b> helps in selecting the correct candidate from these agents. Note that the order -- in which different runs are added -- matters as k gets larger, especially when the k candidate solutions come from k different agents. In our experiments, we add candidate solutions from the single agent according to the order they are generated, while we add solutions from different agents in a fixed order.
                 </p>
 
                 <h4 class="mt-4 mb-2">Research Question 1: How diverse are LLM-based SWE agents?</h4>

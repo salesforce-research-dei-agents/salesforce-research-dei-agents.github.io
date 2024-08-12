@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>Salesforce Research DEI Agents</title>
+    <title>Salesforce DEI Agents</title>
 
     <meta name="description" content="DEI Agents">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
     <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/leaderboard.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
@@ -103,183 +104,422 @@
 
         <div class="row justify-content-md-center">
             <div class="col-md-2 text-center">
-                <a href="https://arxiv.org/abs/2406.18518">
+                <a href="mailto:kexun@cmu.edu">
                     <img src="img/paper_small.png" height="60px" alt="Paper">
                     <h4><strong>Paper</strong></h4>
                 </a>
             </div>
             <div class="col-md-2 text-center">
-                <a href="https://huggingface.co/datasets/Salesforce/xlam-function-calling-60k">
-                    <img src="img/data.png" height="60px" alt="Data">
-                    <h4><strong>Data</strong></h4>
+                <a href="mailto:kexun@cmu.edu">
+                <image src="img/github.png" height="60px">
+                <h4><strong>Code (Coming Soon) </strong></h4>
                 </a>
             </div>
             <div class="col-md-2 text-center">
-                <a href="https://huggingface.co/collections/Salesforce/xlam-models-65f00e2a0a63bbcd1c2dade4">
-                    <img src="https://huggingface.co/datasets/huggingface/brand-assets/resolve/main/hf-logo.svg" height="60px" alt="HuggingFace Models">
-                    <h4><strong>Models</strong></h4>
+                <a href="https://github.com/zkx06111/experiments/tree/main/evaluation/lite/20240727_salesforce_research_ensemble_agents">
+                    <img src="img/data.jpg" height="60px" alt="Data">
+                    <h4><strong>Trajectory </strong></h4>
+                </a>
+            </div>
+            <div class="col-md-2 text-center">
+                <a href="#leaderboard">
+                <image src="img/results.svg" height="60px">
+                <h4><strong>Leaderboard Results</strong></h4>
                 </a>
             </div>
         </div>
 
-
-        <!-- <div class="row justify-content-md-center">
+        <br>
+        <div class="row justify-content-md-center">
             <div class="col-md-10 col-lg-8">
+                <figure style="text-align:center;">
+                    <img src="img/swecommittee_teaser.jpg" width="100%">
+                    <figcaption><b>Figure:</b> Different SWE agents (Aider, Moatless, Agentless, OpenDevin) resolve very different sets of issues (the colored girds), despite having similar resolve rates (b). Our proposed <b>DEI</b> Committee takes candidates patches and tries to select the best, oracle choice (c), improving the resolve rate significantly to be better than any single agent in the committee.</figcaption>
+                </figure>
+            </div>
+        </div>
+
+        <div class="row justify-content-md-center">
+            <div class="col-md-12 col-lg-10">
                 <h3 class="mt-4 mb-2">Abstract</h3>
                 <p class="text-justify">
-                    The advancement of function-calling agent models requires diverse, reliable, and high-quality datasets. This paper presents APIGen, an automated data generation pipeline designed to produce verifiable high-quality datasets for function-calling applications. We leverage APIGen and collect 3673 executable APIs across 21 different categories to generate diverse function-calling datasets in a scalable and structured manner. Each data in our dataset is verified through three hierarchical stages: format checking, actual function executions, and semantic verification, ensuring its reliability and correctness. We demonstrate that models trained with our curated datasets, even with only 7B parameters, can achieve state-of-the-art performance on the Berkeley Function-Calling Benchmark, outperforming multiple GPT-4 models. Moreover, our 1B model achieves exceptional performance, surpassing GPT-3.5-Turbo and Claude-3 Haiku. We release a dataset containing 60,000 high-quality entries, aiming to advance the field of function-calling agent domains.
-                </p>
-                <p style="text-align:center;">
-                    <image src="img/overview.jpg" width="100%">
+                    Large language model (LLM) agents have shown great potential in solving real-world software engineering (SWE) problems. The most advanced open-source SWE agent framework can resolve over 27% of real GitHub issues in SWE-Bench Lite. However, these sophisticated agent frameworks exhibit varying strengths, excelling in certain tasks while underperforming in others. To fully harness the diversity of these agents, we propose <b>DEI</b> (Diversity Empowered Intelligence), a framework that leverages their unique expertise. <b>DEI</b> functions as a meta-module atop existing SWE agent frameworks, managing agent collectives for enhanced problem-solving. Experimental results show that a <b>DEI</b>-guided committee of agents is able to surpass the best individual agent's performance by a large margin. For instance, a collection of open-source SWE agents with a maximum individual performance of 27.3% on SWE-Bench Lite can be boosted to 34.3% by DEI, beating most closed-source solutions on the leaderboard. Our findings contribute to the growing body of research on collaborative AI systems and their potential to solve complex software engineering challenges.
                 </p>
 
-                <h3 class="mt-4 mb-2">Framework</h3>
+                <h3 class="mt-4 mb-2">DEIBASE: A Simple Yet Powerful DEI framework</h3>
                 <p class="text-justify">
-                    This section introduces the detailed design of APIGen, an <b>Automated Pipeline for Generating verifiable and diverse function-calling datasets</b>. Our framework is designed with three key factors in mind: data quality, data diversity, and collection scalability. We achieve these through the key modules shown in the figure below: the multi-stage data verification process ensures data quality, the seed QA (query-answer) data sampler, API sampler, and various prompt templates ensure diversity, and our structured modular design using a unified format enables the system to scale to diverse API sources, including but not limited to Python functions and representational state transfer (REST) APIs.
-                </p>
-                <h4 class="mt-4 mb-2">Data Generation Overview</h4>
-                <p class="text-justify">
-                    The data generation process using the APIGen framework begins by sampling one or more APIs and example query-answer (QA) pairs from the library, then formatting them into a standardized JSON format (see figure below for examples). A prompt template is selected based on the desired data generation objectives, which steers the LLM in generating relevant query-answer pairs. Each answer in the generated pairs is a function call formatted in JSON.
-                </p>
-                <p style="text-align:center;">
-                    <image src="img/json_format_example.png" width="100%">
-                </p>
-                <p class="text-justify">
-                    The adoption of a standardized JSON format for APIs, function calls, and generator outputs provides several advantages. Firstly, it establishes a structural way to verify whether the generator's output contains all necessary fields. Outputs that fail to comply with these format requirements are discarded. Secondly, the JSON structure enables efficient checking of function calls for correct parsing and validity of arguments. Calls that include arguments not present in the API library or hallucinate non-existent functions are excluded, enhancing the overall quality of the dataset. Another key benefit is the scalability it enables. With this uniform format, APIGen can easily incorporate data from diverse sources (Python functions, REST APIs, etc) by developing format converters that adapt them into these basic JSON elements, without modifying other core components, such as the prompting library, making the framework highly adaptable and extensible.
-                </p>
-                <p class="text-justify">
-                    The generated function calls are subjected to a multi-stage verification process to ensure their correctness and relevance. First, a format checker verifies correct JSON formatting and parseability. Next, the API execution engine processes the calls and sends the results and queries to a semantic checker, another LLM, which assesses alignment between the function calls, execution results, and query objectives. Data points passing all stages are added back to the seed dataset as high-quality examples to enhance future generation diversity.
+                    We present <b>DEIBASE</b>, a simple yet powerful implementation of the DEI framework, tailored for SWE-Bench like problems. The context in the setup includes the repository, along with relevant files and issue descriptions. The meta-policy's action space consists of the final patches generated by different agent frameworks, each specialized in addressing various aspects of the problem.
                 </p>
 
-                <h4 class="mt-4 mb-2">Multi-Stage Data Verification</h4>
                 <p class="text-justify">
-                    Prioritizing quality is crucial, as previous research has shown that small amounts of high-quality fine-tuning data can substantially enhance model performance on domain-specific tasks. This motivates our multi-stage dataset verification process to align large language models effectively.
+                    <b>DEIBASE</b> utilizes a Large Language Model (LLM) as a code review committee. The LLM evaluates candidate patches by analyzing the state of the code base before and after the proposed changes, in conjunction with the contextual information from the issue descriptions. It produces detailed explanations for each patch, justifying the modifications based on the identified issues, the context, and the specific changes made.
                 </p>
+
+
                 <p class="text-justify">
-                    The key insight driving our framework design is that, unlike synthetic chat data which can be difficult to evaluate, function-calling answers can be directly executed via their corresponding APIs. This enables checking if the output API and parameters' formats are correct, if the generated API calls are executable, and if execution results match the query's intent, etc. Based on this observation, we propose a three-stage verification process:
+                    While other methods of code review and scoring, such as rule-based approaches, can be incorporated into our framework, the use of an LLM-based committee offers a unique advantage. LLMs excel at evaluating solutions, which often requires less complexity than generating them. DEIBASE thus serves as an effective baseline for LLM-based SWE evaluation, highlighting potential performance variations among diverse SWE agents and showcasing the capabilities of our method.
+                </p>
+
+                <figure>
+                    <img src="img/swecommittee_pipeline.jpg" alt="Framework Overview" style="width:100%;">
+                    <figcaption><b>Figure:</b> Framework Overview. <b>DEI</b> first examines the code base before and after a candidate patch, along with other relevant contexts. Then, it generates an explanation for the issue, the context, and the patch and tries to justify the patch. With its own explanation, it scores the candidate patches and picks the top-scoring ones as more likely to be correct.</figcaption>
+                </figure>
+
+                <h5 class="mt-4 mb-2">Step 1: Input Construction</h5>
+                <p class="text-justify">
+                    Four inputs are given to <b>DEIBASE</b> for each patch: the issue description itself, relevant context (code snippets identified by an SWE agent as relevant to the issue), code before the patch, and code after the patch. The form of inputs reflects two design choices. First, the entire repository is often too large to fit directly in the context limit of LLMs, so we use the relevant context instead to save token costs and help the model focus. Second, the format of a patch is not the easiest for an LLM to read as it switches back and forth between the pre-change code and the changed code, so we give the code before and after the patch separately to the model for easier understanding. 
+
+                <h5 class="mt-4 mb-2">Step 2: Explanation Generation</h5>
+                <p class="text-justify">
+                    To help the model better "understand" the patch before scoring, we instruct it to generate various explanations regarding the patch in a specified order. The order is decided so that the earlier explanations can also help the later ones. We describe each explanation in the order they are generated here:
                 </p>
                 <ul>
-                    <li><b>Stage 1: Format Checker:</b> This stage performs sanity checks to filter out poorly formatted or incomplete data. The LLM output must strictly follow a JSON format with the "query" and "answer" fields. Additionally, the function calls are checked for correct JSON parsing and valid arguments. Generated calls whose arguments or functions are not present in the given APIs are eliminated to reduce hallucination and improve data quality.</li>
-                    <li><b>Stage 2: Execution Checker:</b> Well-formatted function calls from Stage 1 are executed against the appropriate backend. Unsuccessful executions are filtered out, and fine-grained error messages are provided for failures.</li>
-                    <li><b>Stage 3: Semantic Checker:</b> Successful Stage 2 execution results, available functions, and the generated query are formatted and passed to another LLM to assess if the results semantically align with the query's objective. Data points that pass all three verification stages are regarded as high-quality and added back to improve future diverse data generation.</li>
-                </ul>
-
-                <h4 class="mt-4 mb-2">Methods to Improve Dataset Diversity</h4>
-                <p class="text-justify">
-                    Encouraging diversity in training datasets is crucial for developing robust function-calling agents that can handle a wide range of real-world scenarios. In APIGen, we promote data diversity through multiple perspectives, including query style diversity, sampling diversity, and API diversity.
-                </p>
-                <ul>
-                    <li><b>Query Style Diversity:</b> APIGen's dataset is structured into four main categories: simple, multiple, parallel, and parallel multiple, each designed to challenge and enhance the model's capabilities in different usage scenarios. These categories are controlled by corresponding prompts and seed data.</li>
-                    <li><b>Sampling Diversity:</b> APIGen utilizes a sampling system designed to maximize the diversity and relevance of the generated datasets. This includes API Sampler, Example Sampler, and Prompt Sampler.</li>
+                    <li><b>Issue explanation:</b> Explains what the issue is about and what problem it may be causing.</li>
+                    <li><b>Context explanation:</b> Explains how and why each relevant code span (there might be many of these) is relevant to the issue.</li>
+                    <li><b>Location explanation:</b> Explains if and why the patch is modifying the correct part of the code that's faulty.</li>
+                    <li><b>Patch explanation:</b> Explains if and how the patch is fixing the issue.</li>
+                    <li><b>Conflict detection:</b> Checks whether the patch conflicts with other relevant code snippets.</li>
                 </ul>
                 <p class="text-justify">
-                    In APIGen, the number of examples and APIs sampled for each dataset iteration is randomly chosen from a predefined range. This randomization enhances dataset variability by preventing repetitive patterns and ensuring a broad coverage of scenarios.
+                    We explicitly instruct the model to refer back to the earlier explanations while generating the later ones.
                 </p>
 
-                <h4 class="mt-4 mb-2">Dataset API Sources</h4>
+                <h5 class="mt-4 mb-2">Step 3: Patch Scoring</h5>
                 <p class="text-justify">
-                    To ensure a high-quality and diverse dataset, we focused on collecting real-world APIs that could be readily executed and came with thorough documentation. We primarily sourced APIs from ToolBench, a comprehensive tool-use dataset that includes 16,464 REST APIs across 49 coarse-grained categories from RapidAPI Hub. This hub is a leading marketplace featuring a vast array of developer-contributed APIs.
-                </p>
-                <p class="text-justify">
-                    To further enhance the usability and quality of the APIs, we perform the following filtering and cleaning procedures on the ToolBench dataset:
-                </p>
-                <ul>
-                    <li><b>Data Quality Filtering:</b> We remove APIs with incorrectly parsed documentation and those lacking required or optional parameters. APIs requiring no parameters were excluded to maintain the challenge level appropriate for our dataset needs.</li>
-                    <li><b>API Accessibility Testing:</b> We tested API accessibility by making requests to each endpoint using example parameters provided in the dataset and through the Stable Toolbench server. APIs that could not be executed or returned errors, such as timeouts or invalid endpoints, were discarded.</li>
-                    <li><b>Docstring Regeneration:</b> To improve the quality of API documentation, we regenerated docstrings for the APIs that have noisy and unusable descriptions.</li>
-                </ul>
-                <p style="text-align:center;">
-                    <image src="img/dataset_pie_chart.png" width="40%">
-                </p>
-                <p class="text-justify">
-                    After cleaning, we obtain 3,539 executable REST APIs with good documentation. Additionally, we incorporated Python functions as another API type, inspired by the executable evaluation categories of the Berkeley function-calling benchmark. We collected 134 well-documented Python functions covering diverse fields such as mathematics, finance, and data management. Sample API examples are provided in the supplementary material.
-                </p>
-                <p class="text-justify">
-                    The original ToolBench dataset contained semantically overlapping categories such as <tt>Finance</tt> and <tt>Financial</tt>. We consolidated these into 21 distinct categories to ensure clarity and balance across the dataset. Figure illustrates the distribution of the 3,673 executable APIs across these redefined categories, spanning sectors like technology, social sciences, education, and sports. This diverse collection of APIs provides a strong foundation for synthetic data generation and is a valuable asset for ensuring data quality and reliability.
+                    Based on its own explanations, the model is asked to give the candidate patch a score of 1 to 10. We give the model detailed rubrics of what violations/mistakes lead to higher score deduction and what should only be considered minor violations. For example, if the model finds the modification location to be wrong, it is considered a serious mistake.
                 </p>
 
-                <h4 class="mt-4 mb-2">Collection Setup and Dataset Details</h4>
+                <h3 class="mt-4 mb-2">Experiments</h3>
                 <p class="text-justify">
-                    To validate the effectiveness of the APIGen framework, we generated datasets targeting various query styles. We utilized several base LLMs for data generation, including DeepSeek-V2-Chat (236B), DeepSeek-Coder-33B-Inst, Mixtral-8x22B-Inst, and Mixtral-8x7B-Inst. For each model, our target was to generate 40,000 data points by sampling different combinations of APIs, seed data, and prompt templates. To foster diversity in the generated responses, we set the generation temperature to 0.7 across all models. Examples of the prompt templates and APIs used are provided in the supplementary materials for reference.
-                </p>
-                <p class="text-justify">
-                    Table below presents statistics for the data generation process with different models, including the total verified data point count and the number of filtered data points at each verification stage. The filtering process successfully removes many low-quality data points due to formatting issues, execution errors, or failure to pass the semantic check. The first two stages, format checker and execution checker, typically filter out the majority of low-quality data. These data points often have infeasible argument ranges, incorrect types, missing required parameters, or more severe issues such as hallucination of function calls or parameters. Our systematic verification process provides a rigorous way to reduce the occurrence of these situations.
-                </p>
-                <p style="text-align:center;">
-                    <table class="table">
-                        <caption>Filtering statistics for the generated datasets using different base LLMs.</caption>
-                        <thead>
-                            <tr>
-                                <th>Model</th>
-                                <th>Verified Data</th>
-                                <th>Fail Format</th>
-                                <th>Fail Execution</th>
-                                <th>Fail Semantic</th>
-                                <th>Pass Rate</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>DeepSeek-Coder-33B-Inst</td>
-                                <td>13,769</td>
-                                <td>4,311</td>
-                                <td>15,496</td>
-                                <td>6,424</td>
-                                <td>34.42%</td>
-                            </tr>
-                            <tr>
-                                <td>Mixtral-8x7B-Inst</td>
-                                <td>15,385</td>
-                                <td>3,311</td>
-                                <td>12,341</td>
-                                <td>7,963</td>
-                                <td>38.46%</td>
-                            </tr>
-                            <tr>
-                                <td>Mixtral-8x22B-Inst</td>
-                                <td>26,384</td>
-                                <td>1,680</td>
-                                <td>5,073</td>
-                                <td>6,863</td>
-                                <td>65.96%</td>
-                            </tr>
-                            <tr>
-                                <td>DeepSeek-V2-Chat (236B)</td>
-                                <td>33,659</td>
-                                <td>817</td>
-                                <td>3,359</td>
-                                <td>2,165</td>
-                                <td>84.15%</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </p>
-                <p class="text-justify">
-                    The semantic checker also plays a crucial role in filtering generated data that does not align with the query's objectives. For instance, if a user's query contains multiple requests, but the returned results only address one, or if the generated function-call data and execution results do not match the user's query, the data point will be filtered out. Including these data points in the training set for model training could potentially harm the performance, as demonstrated in the experiments.
-                </p>
-                <p class="text-justify">
-                    We observe that stronger models like DeepSeek-V2-Chat and Mixtral-8x22B-Inst have better format-following capabilities and higher pass rates, while the two relatively smaller models have a much higher likelihood of producing data that cannot be executed. This suggests that when using weaker models to generate data, a strict verification process is recommended to filter out low-quality data.
-                </p>
-                <p class="text-justify">
-                    We are releasing approximately 60,000 high-quality function-calling datasets generated from the two strongest models: Mixtral-8x22B-Inst and DeepSeek-V2-Chat (236B). These datasets include all the query styles mentioned and cover a wide range of practical situations, with 3,673 diverse APIs across 21 categories. Each data point has been verified using real-world APIs to ensure its validity and usefulness. By making this dataset publicly available, we aim to benefit the research community and facilitate future work in this area.
+                    We aim to answer two research questions with our experiments: 1) How diverse are LLM-based SWE agents in terms of intra- and inter-agent diversity? 2) To what extent can <b>DEI</b> harness the diversity and increase the performances of these SWE agents?
                 </p>
 
+                <h4 class="mt-4 mb-2">Experiment Setup</h4>
+                <h5 class="mt-4 mb-2">Benchmark and Agents</h5>
                 <p class="text-justify">
-                    We mainly test our function-calling models on the <a href="https://gorilla.cs.berkeley.edu/leaderboard.html">Berkeley Function-Calling Leaderboard (BFCL)</a>, which offers a comprehensive evaluation framework for assessing LLMs' function-calling capabilities across various programming languages and application domains like Java, JavaScript, and Python.
+                    <b>Benchmark:</b> We conduct our experiments on SWE-Bench Lite, a 300-instance subset sampled from the full SWE-Bench for providing a more self-contained evaluation of functional bug fixes. Compared to the full SWE-Bench, SWE-Bench Lite has significantly more submissions on the leaderboard for us to conduct a more comprehensive analysis of inter-agent diversity.
                 </p>
-                
-                <div align="center">
-                    <img src="https://github.com/apigen-pipeline/apigen-pipeline.github.io/blob/main/img/table-result-0718.png?raw=true" width="620" alt="Performance comparison on Berkeley Function-Calling Leaderboard">
-                    <p>Performance comparison on the BFCL benchmark as of date 07/18/2024. Evaluated with <code>temperature=0.001</code> and <code>top_p=1</code></p>
+                <p class="text-justify">
+                    <b>Agents:</b> For intra-agent diversity, we consider three well-performing open-source agents on the SWE-Bench Lite leaderboard: Agentless, Moatless, and Aider by running them 10 times with the same parameters. For inter-agent diversity, we consider 10 agents (open-source or not) that have similar resolve rates, all between 26.0% and 31.0% on the leaderboard by directly using their submitted patches to the SWE-Bench issues.
+                </p>
+                <p class="text-justify">
+                    For the evaluation of <b>DEIBASE</b> on different agents, we consider 3 groups of agents that form different <b>DEI</b> Committees, including one group consisting of only open-source agents. For the evaluation of <b>DEIBASE</b> on multiple runs of a single agent, we use the generations of the three aforementioned agents -- Agentless, Moatless Tools, and Aider.
+                </p>
+                   
+                <div class="text-center">
+                    <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+                        <div style="flex: 0 0 40%; margin: 1.5%;">
+                            <img src="img/multiagent_resolve_percentage.jpg" alt="Multiagent Resolve Percentage" style="width: 100%;">
+                        </div>
+                        <div style="flex: 0 0 40%; margin: 1.5%;">
+                            <img src="img/agentless_resolve_percentage.jpg" alt="Agentless Resolve Percentage" style="width: 100%;">
+                        </div>
+                        <div style="flex: 0 0 40%; margin: 1.5%;">
+                            <img src="img/aider_resolve_percentage.jpg" alt="Aider Resolve Percentage" style="width: 100%;">
+                        </div>
+                        <div style="flex: 0 0 40%; margin: 1.5%;">
+                            <img src="img/moatless_resolve_percentage.jpg" alt="Moatless Resolve Percentage" style="width: 100%;">
+                        </div>
+                    </div>
+                    <p class="text-justify" style="margin-top: 10px;">
+                        <b>Figure:</b> How different metrics change as more candidate solutions are involved. In all 4 scenarios, there is a huge gap between Union@k and Average@k.
+                    </p>
                 </div>
-                
+
+                <h5 class="mt-4 mb-2">Evaluation Metrics</h5>
                 <p class="text-justify">
-                    Our <code>xLAM-7b-fc-r</code> secures the 3rd place with an overall accuracy of 88.24% on the leaderboard, outperforming many strong models. Notably, our <code>xLAM-1b-fc-r</code> model is the only tiny model with less than 2B parameters on the leaderboard, but still achieves a competitive overall accuracy of 78.94%, outperforming GPT3-Turbo and many larger models. Both models exhibit balanced performance across various categories, showing their strong function-calling capabilities despite their small sizes.
+                    We use the same set of metrics for both intra- and inter-agent diversity as these metrics are defined for multiple candidate solutions without requiring them to come from the same candidate:
+                </p>
+                <ul>
+                    <li><b>Resolve rate:</b> Measures how good a SWE agent is. It is defined as the percentage of issues resolved by the agent. We measure both single SWE agents and <b>DEI</b> with it to see how much <b>DEI</b> helps.</li>
+                    <li><b>Union@k:</b> Measures the <i>best case</i> performance had the agents been perfectly consistent by counting the number of problems solved by any of the $k$ solutions.</li>
+                    <li><b>Intersect@k:</b> Measures the <i>worst case</i> performance by computing the number of problems solved by all $k$ solutions.</li>
+                    <li><b>Average@k:</b> Measures the <i>average case</i> performance by computing the average number of problems solved. It corresponds to the case of a random reward function that uniformly samples a candidate solution for each problem.</li>
+                    <li><b>n@k:</b> Measures the performance of any reranking mechanism by computing the number of problems solved by $k$ chosen submissions from a given set of samples.</li>
+                </ul>
+
+                <p class="text-justify">
+                    Our research questions can be answered by the gaps between these metrics. <b>Union@k - Intersect@</b> measures how diverse the agents are, while <b>n@k - Average@k</b> measures how much <b>DEI</b> helps in selecting the correct candidate from these agents. Note that the order -- in which different runs are added -- matters as $k$ gets larger, especially when the $k$ candidate solutions come from $k$ different agents. In our experiments, we add candidate solutions from the single agent according to the order they are generated, while we add solutions from different agents in a fixed order.
                 </p>
 
+                <h4 class="mt-4 mb-2">Research Question 1: How diverse are LLM-based SWE agents?</h4>
+                <p class="text-justify">
+                    To answer this question, we report the "@k" metrics of 10 different agents and 10 runs of single agents in <b>Figure 1</b>. Several observations can be made about the results:
+                    <b>SWE agents resolve very different sets of issues across agents and agent runs. Their full potential is far from fully released.</b>
+                    In all four subfigures, the gap between Union@k and Average@k, as well as between Average@k and Intersect@k, is large. 
+                    As k—the number of candidates—gets larger, the gap also gets larger. In fact, Union@k is always more than 50% larger than Average@k for k≥5.
+                    This indicates that current SWE agents are potentially capable of resolving a lot more issues, as long as we have a reranker that can tell which candidates are correct.
+                    <b>Different agents resolve more distinct issues than different runs of a single agent. In other words, diversity does empower intelligence.</b>
+                    The absolute/relative difference between Union@k and Average@k is much larger in the first subfigure than the following three subfigures.
+                    As k approaches 10, the distinct issues resolved are 2× the average number of issues resolved by a single agent in the group.
+                </p>             
+
+                
             </div>
-        </div> -->
-    </div> 
+        </div>
+    <br>
+            <!-- Leaderboard Section -->
+    <div class="container" id="leaderboard" style="background: #e5effc">
+        <div class="col-md-12">
+            <h5>SWE-Bench Lite Results</h5>
+            <p class="text-justify" style="font-size: 15px;">
+                (Last Updated: 2024-08-12)
+            </p>
+            <p class="text-left">
+                We present the resolve rates of top-ranking submissions on SWE-Bench Lite. We evaluate 3 DEI Committees formed by different groups of agents. Each DEI Committee outperforms the best agent in it. DEIBASE-Open, a committee formed by 4 open-source agents can beat many closed-source agents.
+            </p>
+<!--             <div style="margin-bottom: 15px;">
+                <button id="expand-btn" onclick="toggleExpand()">Expand/Collapse Table</button>
+                <span style="margin-left: 10px;"><b><i style="font-size: 1.0em;">Last Updated: 2024-07-28 <a href="https://github.com/ShishirPatil/gorilla/tree/main/berkeley-function-call-leaderboard#changelog">[Change
+                                Log]</a></i></b></span>
+            </div> -->
+            <div class="table-container">
+                <table id="leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th class="summary-small-header" colspan="1">DEI Group</th>
+                            <th class="summary-small-header" colspan="1">% Resolve</th>
+                            <th class="summary-small-headerr" colspan="1">SWE Agent System</th>
+                            <th class="summary-small-header" colspan="1">Open Source Code</th>
+                            <th class="summary-small-header" colspan="1">Trajectories</th>
+                            <th class="summary-small-header" colspan="1">Open Patch Candidates</th>
+                            <th class="summary-small-header" colspan="1">Backend LLM</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background-color: #6699cc;">
+                            <td><b>1</b></td>
+                            <td><b>55.0</b></td>
+                            <td><b>Salesforce Research DEIBASE-1</b></td>
+                            <td>&#10003;</td>
+                            <td>&#10003;</td>
+                            <td>&#10007;</td>
+                            <td>gpt4o</td>
+                        </tr>
+                        <tr style="background-color: #b3cde3;">
+                            <td>1</td>
+                            <td>50.6</td>
+                            <td><a href="https://cosine.sh/">Cosine Genie</a></td>
+                            <td>&#10007;</td>
+                            <td>&#10007;</td>
+                            <td>-</td>
+                            <td>Fine-tuned OpenAI GPT</td>
+                        </tr>
+                        <tr style="background-color: #b3cde3;">
+                            <td>1</td>
+                            <td>43.0</td>
+                            <td><a href="https://aide.dev/">CodeStory Aide</a></td>
+                            <td>&#10007;</td>
+                            <td>&#10007;</td>
+                            <td>-</td>
+                            <td>gpt4o + Claude 3.5 Sonnet</td>
+                        </tr>
+                        <tr>
+                            <td>-</td>
+                            <td>38.0</td>
+                            <td><a href="https://mentat.ai/blog/mentatbot-sota-coding-agent">AbenteAI MentatBot</a></td>
+                            <td>&#10007;</td>
+                            <td>&#10007;</td>
+                            <td>-</td>
+                            <td>gpt4o</td>
+                        </tr>
+                        <tr style="background-color: #ffb366;">
+                            <td><b>2</b></td>
+                            <td><b>37</b></td>
+                            <td><b>Salesforce Research DEIBASE-2</b></td>
+                            <td>&#10003;</td>
+                            <td>&#10003;</td>
+                            <td>&#10007;</td>
+                            <td>gpt4o</td>
+                        </tr>
+                        <tr style="background-color: #66cc66;">
+                            <td><b>Open</b></td>
+                            <td><b>34.3</b></td>
+                            <td><b>Salesforce Research DEI-Open</b></td>
+                            <td>&#10003;</td>
+                            <td>&#10003;</td>
+                            <td>&#10003;</td>
+                            <td>gpt4o</td>
+                        </tr>
+                        <tr>
+                            <td>-</td>
+                            <td>34.0</td>
+                            <td><a href="https://www.marscode.com/">Bytedance MarsCode</a></td>
+                            <td>&#10007;</td>
+                            <td>&#10007;</td>
+                            <td>-</td>
+                            <td>gpt4o</td>
+                        </tr>
+                        <tr>
+                            <td>-</td>
+                            <td>33.0</td>
+                            <td><a href="https://arxiv.org/abs/2406.01422">Alibaba Lingma</a></td>
+                            <td>&#10007;<sup>1</sup></td>
+                            <td>&#10007;</td>
+                            <td>-</td>
+                            <td>gpt-4-1106-preview</td>
+                        </tr>
+                        <tr style="background-color: #ffcc99;">
+                            <td>2</td>
+                            <td>31.3</td>
+                            <td><a href="https://www.factory.ai/">Factory Code Droid</a></td>
+                            <td>&#10007;</td>
+                            <td>&#10007;</td>
+                            <td>-</td>
+                            <td>Anthropic + OpenAI</td>
+                        </tr>
+                        <tr style="background-color: #ffcc99;">
+                            <td>2</td>
+                            <td>30.6</td>
+                            <td><a href="https://autocoderover.dev/">AutoCodeRover</a></td>
+                            <td>&#10007;<sup>2</sup></td>
+                            <td>&#10007;</td>
+                            <td>-</td>
+                            <td>gpt4o</td>
+                        </tr>
+                        <tr style="background-color: #ffcc99;">
+                            <td>2</td>
+                            <td>29.6</td>
+                            <td><a href="https://aws.amazon.com/q/developer/">Amazon Q Developer</a></td>
+                            <td>&#10007;</td>
+                            <td>&#10007;</td>
+                            <td>-</td>
+                            <td>Unknown</td>
+                        </tr>
+                        <tr style="background-color: #ffcc99;">
+                            <td>2</td>
+                            <td>28.3</td>
+                            <td><a href="https://github.com/NL2Code/CodeR">CodeR</a></td>
+                            <td>&#10007;<sup>1</sup></td>
+                            <td>&#10007;</td>
+                            <td>-</td>
+                            <td>gpt-4-1106-preview</td>
+                        </tr>
+                        <tr style="background-color: #ffcc99;">
+                            <td>2</td>
+                            <td>28.0</td>
+                            <td><a href="https://github.com/masai-dev-agent/masai">MASAI</a></td>
+                            <td>&#10007;<sup>1</sup></td>
+                            <td>&#10007;</td>
+                            <td>-</td>
+                            <td>Unknown</td>
+                        </tr>
+                        <tr>
+                            <td>-</td>
+                            <td>27.6</td>
+                            <td><a href="https://github.com/swe-bench/experiments/tree/main/evaluation/lite/20240706_sima_gpt4o">SIMA</a></td>
+                            <td>&#10007;<sup>1</sup></td>
+                            <td>&#10003;</td>
+                            <td>&#10003;<sup>3</sup></td>
+                            <td>gpt4o</td>
+                        </tr>
+                        <tr style="background-color: #ccffcc;">
+                            <td>Open</td>
+                            <td>27.3</td>
+                            <td><a href="https://github.com/OpenAutoCoder/Agentless">Agentless</a></td>
+                            <td>&#10003;</td>
+                            <td>&#10003;</td>
+                            <td>-</td>
+                            <td>gpt4o</td>
+                        </tr>
+                        <tr style="background-color: #ccffcc;">
+                            <td>Open</td>
+                            <td>26.6</td>
+                            <td><a href="https://github.com/aorwall/moatless-tools">Moatless Tools</a></td>
+                            <td>&#10003;</td>
+                            <td>&#10003;</td>
+                            <td>-</td>
+                            <td>Claude 3.5 Sonnet</td>
+                        </tr>
+                        <tr>
+                            <td>-</td>
+                            <td>26.6</td>
+                            <td><a href="https://github.com/swe-bench/experiments/tree/main/evaluation/lite/20240612_IBM_Research_Agent101">IBM Research Agent</a></td>
+                            <td>&#10007;</td>
+                            <td>&#10007;</td>
+                            <td>-</td>
+                            <td>Unknown</td>
+                        </tr>
+                        <tr style="background-color: #ccffcc;">
+                            <td>Open</td>
+                            <td>26.3</td>
+                            <td><a href="https://github.com/paul-gauthier/aider">Aider</a></td>
+                            <td>&#10003;</td>
+                            <td>&#10007;</td>
+                            <td>-</td>
+                            <td>gpt4o + Claude 3 Opus</td>
+                        </tr>
+                        <tr style="background-color: #ccffcc;">
+                            <td>Open</td>
+                            <td>26.0</td>
+                            <td><a href="https://docs.all-hands.dev/">OpenDevin + CodeAct</a></td>
+                            <td>&#10003;</td>
+                            <td>&#10003;</td>
+                            <td>-</td>
+                            <td>gpt4o</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p></p>
+            <p>
+                <b>Note:</b>
+                <ul>
+                    <li><sup>1</sup> Their repo has no code yet.</li>
+                    <li><sup>2</sup> An earlier version is open-source. The current one is not.</li>
+                    <li><sup>3</sup> Candidates are generated by a "modification of moatless tools".</li>
+                </ul>
+            </p>
+        </div>
+    <div>
+        <p></p>
+    </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <div class="col-md-12 col-lg-10">
+    <h4 class="mt-4 mb-2">Research Question 2: How much does DEI help?</h4>
+    <p class="text-justify">
+        We apply <b>DEIBASE</b> to the candidates in <b>Figure 1</b> as they are added to the group. Our findings are:
+    </p>
+    <p class="text-justify">
+        <b>DEIBASE helps in most cases.</b> For most values of k in all subfigures, we observe a significant improvement of n@k over Average@k, indicating that <b>DEIBASE</b> selects correct candidates much better than a random baseline.
+    </p>
+    <p class="text-justify">
+        <b>DEIBASE helps more when the candidates come from different agents.</b> This finding resonates with the similar finding from research question one: Since candidates from multiple agents have a larger potential of improvement (Union@k - Average@k), the actual improvements created by <b>DEIBASE</b> (n@k - Average@k) are also larger. This suggests that given a limited budget of candidates, we should probably choose diversity of agents over multiple runs of the same agent.
+    </p>
+    <p class="text-justify">
+        <b>As k gets larger, DEIBASE's improvement first increases and then plateaus.</b> While larger k generally indicates higher n@k, the margin gets smaller and there are cases when an increase in k results in a slight drop in performance. This suggests that the current <b>DEIBASE</b> is not ideal for a large group of agents and there is still room for a better reranking mechanism.
+    </p>
+    <p class="text-justify">
+        Based on the lessons we summarize above, we propose three <b>DEIBASE</b> groups in which each candidate is from a different agent and no more than 5 candidates exist for each instance. <b>DEIBASE-1</b> consists of the top 2 agents. <b>DEIBASE-2</b> consists of 5 closed-source agents that have high performance on the leaderboard. <b>DEIBASE-Open</b> consists of 4 open-source agents so that we know future researchers can run the entire pipeline.
+    </p>
+    <p class="text-justify">
+        We also evaluate <b>DEIBASE's</b> performance on these groups in <b>Table 1</b>. All three <b>DEIBASE</b> instances outperform the best candidate in the group. Surprisingly, <b>DEIBASE-Open</b> shows a 7% increase in resolve rates and beats most of the closed-source systems.
+    </p>
+        </div>
+    </div>
+
+<div class="row justify-content-md-center">
+            <div class="col-md-12 col-lg-10">
+                <h3>
+                    Citation 
+                </h3>
+                <a href="https://arxiv.org/abs/2310.10625">[arxiv version]</a>
+                <div class="form-group col-md-12">
+                    <textarea id="bibtex" class="form-control" readonly>
+@article{du2023video,
+  title={Diversity Empowers Intelligence: Integrating Expertise of Software Engineering Agents},
+  author={xxxx},
+  journal={arXiv preprint arXiv:xxxx},
+  year={2024}
+}</textarea>
+                </div>
+            </div>
+        </div>
+
+
+
     <div class="row justify-content-md-center mt-4">
         <div class="col-md-10 col-lg-8">
             <p class="text-justify" style="font-size: 10px;">

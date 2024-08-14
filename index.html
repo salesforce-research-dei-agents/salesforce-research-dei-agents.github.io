@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>Salesforce DEI Agents</title>
+    <title>Salesforce Research DEI Agents</title>
 
     <meta name="description" content="Salesforce Research DEI Agents">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -145,7 +145,229 @@
                 <p class="text-justify">
                     Large language model (LLM) agents have shown great potential in solving real-world software engineering (SWE) problems. The most advanced open-source SWE agent framework can resolve over 27% of real GitHub issues in SWE-Bench Lite. However, these sophisticated agent frameworks exhibit varying strengths, excelling in certain tasks while underperforming in others. To fully harness the diversity of these agents, we propose <b>DEI</b> (Diversity Empowered Intelligence), a framework that leverages their unique expertise. <b>DEI</b> functions as a meta-module atop existing SWE agent frameworks, managing agent collectives for enhanced problem-solving. Experimental results show that a <b>DEI</b>-guided committee of agents is able to surpass the best individual agent's performance by a large margin. For instance, a collection of open-source SWE agents with a maximum individual performance of 27.3% on SWE-Bench Lite can be boosted to 34.3% by DEI, beating most closed-source solutions on the leaderboard. Our findings contribute to the growing body of research on collaborative AI systems and their potential to solve complex software engineering challenges.
                 </p>
+            </div>
+        </div>
+        <br>
+        <!-- Leaderboard Section -->
+        <div class="container" id="leaderboard" style="background: #e5effc">
+            <div class="col-md-12">
+                <h5>SWE-Bench Lite Leaderboard Results</h5>
+                <p class="text-justify" style="font-size: 15px;">
+                    (Last Updated: 2024-08-12)
+                </p>
+                <p class="text-left">
+                    We present the resolve rates of top-ranking submissions on SWE-Bench Lite. We evaluate 3 DEI Committees formed by different groups of agents. Each DEI Committee outperforms the best agent in it. DEIBASE-Open, a committee formed by 4 open-source agents can beat many closed-source agents.
+                </p>
+    <!--             <div style="margin-bottom: 15px;">
+                    <button id="expand-btn" onclick="toggleExpand()">Expand/Collapse Table</button>
+                    <span style="margin-left: 10px;"><b><i style="font-size: 1.0em;">Last Updated: 2024-07-28 <a href="https://github.com/ShishirPatil/gorilla/tree/main/berkeley-function-call-leaderboard#changelog">[Change
+                                    Log]</a></i></b></span>
+                </div> -->
+                <div class="table-container">
+                    <table id="leaderboard-table">
+                        <thead>
+                            <tr>
+                                <th class="summary-small-header" colspan="1">DEI Group</th>
+                                <th class="summary-small-header" colspan="1">% Resolve</th>
+                                <th class="summary-small-headerr" colspan="1">SWE Agent System</th>
+                                <th class="summary-small-header" colspan="1">Open Source Code</th>
+                                <th class="summary-small-header" colspan="1">Trajectories</th>
+                                <th class="summary-small-header" colspan="1">Open Patch Candidates</th>
+                                <th class="summary-small-header" colspan="1">Backend LLM</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="background-color: #6699cc;">
+                                <td><b>1</b></td>
+                                <td><b>55.0</b></td>
+                                <td><b>Salesforce Research DEIBASE-1</b></td>
+                                <td>&#10003;</td>
+                                <td>&#10003;</td>
+                                <td>&#10007;</td>
+                                <td>gpt4o</td>
+                            </tr>
+                            <tr style="background-color: #b3cde3;">
+                                <td>1</td>
+                                <td>50.6</td>
+                                <td><a href="https://cosine.sh/">Cosine Genie</a></td>
+                                <td>&#10007;</td>
+                                <td>&#10007;</td>
+                                <td>-</td>
+                                <td>Fine-tuned OpenAI GPT</td>
+                            </tr>
+                            <tr style="background-color: #b3cde3;">
+                                <td>1</td>
+                                <td>43.0</td>
+                                <td><a href="https://aide.dev/">CodeStory Aide</a></td>
+                                <td>&#10007;</td>
+                                <td>&#10007;</td>
+                                <td>-</td>
+                                <td>gpt4o + Claude 3.5 Sonnet</td>
+                            </tr>
+                            <tr>
+                                <td>-</td>
+                                <td>38.0</td>
+                                <td><a href="https://mentat.ai/blog/mentatbot-sota-coding-agent">AbenteAI MentatBot</a></td>
+                                <td>&#10007;</td>
+                                <td>&#10007;</td>
+                                <td>-</td>
+                                <td>gpt4o</td>
+                            </tr>
+                            <tr style="background-color: #ffb366;">
+                                <td><b>2</b></td>
+                                <td><b>37</b></td>
+                                <td><b>Salesforce Research DEIBASE-2</b></td>
+                                <td>&#10003;</td>
+                                <td>&#10003;</td>
+                                <td>&#10007;</td>
+                                <td>gpt4o</td>
+                            </tr>
+                            <tr style="background-color: #66cc66;">
+                                <td><b>Open</b></td>
+                                <td><b>34.3</b></td>
+                                <td><b>Salesforce Research DEI-Open</b></td>
+                                <td>&#10003;</td>
+                                <td>&#10003;</td>
+                                <td>&#10003;</td>
+                                <td>gpt4o</td>
+                            </tr>
+                            <tr>
+                                <td>-</td>
+                                <td>34.0</td>
+                                <td><a href="https://www.marscode.com/">Bytedance MarsCode</a></td>
+                                <td>&#10007;</td>
+                                <td>&#10007;</td>
+                                <td>-</td>
+                                <td>gpt4o</td>
+                            </tr>
+                            <tr>
+                                <td>-</td>
+                                <td>33.0</td>
+                                <td><a href="https://arxiv.org/abs/2406.01422">Alibaba Lingma</a></td>
+                                <td>&#10007;<sup>1</sup></td>
+                                <td>&#10007;</td>
+                                <td>-</td>
+                                <td>gpt-4-1106-preview</td>
+                            </tr>
+                            <tr style="background-color: #ffcc99;">
+                                <td>2</td>
+                                <td>31.3</td>
+                                <td><a href="https://www.factory.ai/">Factory Code Droid</a></td>
+                                <td>&#10007;</td>
+                                <td>&#10007;</td>
+                                <td>-</td>
+                                <td>Anthropic + OpenAI</td>
+                            </tr>
+                            <tr style="background-color: #ffcc99;">
+                                <td>2</td>
+                                <td>30.6</td>
+                                <td><a href="https://autocoderover.dev/">AutoCodeRover</a></td>
+                                <td>&#10007;<sup>2</sup></td>
+                                <td>&#10007;</td>
+                                <td>-</td>
+                                <td>gpt4o</td>
+                            </tr>
+                            <tr style="background-color: #ffcc99;">
+                                <td>2</td>
+                                <td>29.6</td>
+                                <td><a href="https://aws.amazon.com/q/developer/">Amazon Q Developer</a></td>
+                                <td>&#10007;</td>
+                                <td>&#10007;</td>
+                                <td>-</td>
+                                <td>Unknown</td>
+                            </tr>
+                            <tr style="background-color: #ffcc99;">
+                                <td>2</td>
+                                <td>28.3</td>
+                                <td><a href="https://github.com/NL2Code/CodeR">CodeR</a></td>
+                                <td>&#10007;<sup>1</sup></td>
+                                <td>&#10007;</td>
+                                <td>-</td>
+                                <td>gpt-4-1106-preview</td>
+                            </tr>
+                            <tr style="background-color: #ffcc99;">
+                                <td>2</td>
+                                <td>28.0</td>
+                                <td><a href="https://github.com/masai-dev-agent/masai">MASAI</a></td>
+                                <td>&#10007;<sup>1</sup></td>
+                                <td>&#10007;</td>
+                                <td>-</td>
+                                <td>Unknown</td>
+                            </tr>
+                            <tr>
+                                <td>-</td>
+                                <td>27.6</td>
+                                <td><a href="https://github.com/swe-bench/experiments/tree/main/evaluation/lite/20240706_sima_gpt4o">SIMA</a></td>
+                                <td>&#10007;<sup>1</sup></td>
+                                <td>&#10003;</td>
+                                <td>&#10003;<sup>3</sup></td>
+                                <td>gpt4o</td>
+                            </tr>
+                            <tr style="background-color: #ccffcc;">
+                                <td>Open</td>
+                                <td>27.3</td>
+                                <td><a href="https://github.com/OpenAutoCoder/Agentless">Agentless</a></td>
+                                <td>&#10003;</td>
+                                <td>&#10003;</td>
+                                <td>-</td>
+                                <td>gpt4o</td>
+                            </tr>
+                            <tr style="background-color: #ccffcc;">
+                                <td>Open</td>
+                                <td>26.6</td>
+                                <td><a href="https://github.com/aorwall/moatless-tools">Moatless Tools</a></td>
+                                <td>&#10003;</td>
+                                <td>&#10003;</td>
+                                <td>-</td>
+                                <td>Claude 3.5 Sonnet</td>
+                            </tr>
+                            <tr>
+                                <td>-</td>
+                                <td>26.6</td>
+                                <td><a href="https://github.com/swe-bench/experiments/tree/main/evaluation/lite/20240612_IBM_Research_Agent101">IBM Research Agent</a></td>
+                                <td>&#10007;</td>
+                                <td>&#10007;</td>
+                                <td>-</td>
+                                <td>Unknown</td>
+                            </tr>
+                            <tr style="background-color: #ccffcc;">
+                                <td>Open</td>
+                                <td>26.3</td>
+                                <td><a href="https://github.com/paul-gauthier/aider">Aider</a></td>
+                                <td>&#10003;</td>
+                                <td>&#10007;</td>
+                                <td>-</td>
+                                <td>gpt4o + Claude 3 Opus</td>
+                            </tr>
+                            <tr style="background-color: #ccffcc;">
+                                <td>Open</td>
+                                <td>26.0</td>
+                                <td><a href="https://docs.all-hands.dev/">OpenDevin + CodeAct</a></td>
+                                <td>&#10003;</td>
+                                <td>&#10003;</td>
+                                <td>-</td>
+                                <td>gpt4o</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p></p>
+                <p>
+                    <b>Note:</b>
+                    <ul>
+                        <li><sup>1</sup> Their repo has no code yet.</li>
+                        <li><sup>2</sup> An earlier version is open-source. The current one is not.</li>
+                        <li><sup>3</sup> Candidates are generated by a "modification of moatless tools".</li>
+                    </ul>
+                </p>
+            </div>
+        <div>
+            <p></p>
+        </div>
+        </div>
 
+        <div class="row justify-content-md-center">
+            <div class="col-md-12 col-lg-10">
                 <h3 class="mt-4 mb-2">DEIBASE: A Simple Yet Powerful DEI framework</h3>
                 <p class="text-justify">
                     We present <b>DEIBASE</b>, a simple yet powerful implementation of the DEI framework, tailored for SWE-Bench like problems. The context in the setup includes the repository, along with relevant files and issue descriptions. The meta-policy's action space consists of the final patches generated by different agent frameworks, each specialized in addressing various aspects of the problem.
@@ -257,224 +479,6 @@
                 
             </div>
         </div>
-    <br>
-            <!-- Leaderboard Section -->
-    <div class="container" id="leaderboard" style="background: #e5effc">
-        <div class="col-md-12">
-            <h5>Table 1: SWE-Bench Lite Results</h5>
-            <p class="text-justify" style="font-size: 15px;">
-                (Last Updated: 2024-08-12)
-            </p>
-            <p class="text-left">
-                We present the resolve rates of top-ranking submissions on SWE-Bench Lite. We evaluate 3 DEI Committees formed by different groups of agents. Each DEI Committee outperforms the best agent in it. DEIBASE-Open, a committee formed by 4 open-source agents can beat many closed-source agents.
-            </p>
-<!--             <div style="margin-bottom: 15px;">
-                <button id="expand-btn" onclick="toggleExpand()">Expand/Collapse Table</button>
-                <span style="margin-left: 10px;"><b><i style="font-size: 1.0em;">Last Updated: 2024-07-28 <a href="https://github.com/ShishirPatil/gorilla/tree/main/berkeley-function-call-leaderboard#changelog">[Change
-                                Log]</a></i></b></span>
-            </div> -->
-            <div class="table-container">
-                <table id="leaderboard-table">
-                    <thead>
-                        <tr>
-                            <th class="summary-small-header" colspan="1">DEI Group</th>
-                            <th class="summary-small-header" colspan="1">% Resolve</th>
-                            <th class="summary-small-headerr" colspan="1">SWE Agent System</th>
-                            <th class="summary-small-header" colspan="1">Open Source Code</th>
-                            <th class="summary-small-header" colspan="1">Trajectories</th>
-                            <th class="summary-small-header" colspan="1">Open Patch Candidates</th>
-                            <th class="summary-small-header" colspan="1">Backend LLM</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr style="background-color: #6699cc;">
-                            <td><b>1</b></td>
-                            <td><b>55.0</b></td>
-                            <td><b>Salesforce Research DEIBASE-1</b></td>
-                            <td>&#10003;</td>
-                            <td>&#10003;</td>
-                            <td>&#10007;</td>
-                            <td>gpt4o</td>
-                        </tr>
-                        <tr style="background-color: #b3cde3;">
-                            <td>1</td>
-                            <td>50.6</td>
-                            <td><a href="https://cosine.sh/">Cosine Genie</a></td>
-                            <td>&#10007;</td>
-                            <td>&#10007;</td>
-                            <td>-</td>
-                            <td>Fine-tuned OpenAI GPT</td>
-                        </tr>
-                        <tr style="background-color: #b3cde3;">
-                            <td>1</td>
-                            <td>43.0</td>
-                            <td><a href="https://aide.dev/">CodeStory Aide</a></td>
-                            <td>&#10007;</td>
-                            <td>&#10007;</td>
-                            <td>-</td>
-                            <td>gpt4o + Claude 3.5 Sonnet</td>
-                        </tr>
-                        <tr>
-                            <td>-</td>
-                            <td>38.0</td>
-                            <td><a href="https://mentat.ai/blog/mentatbot-sota-coding-agent">AbenteAI MentatBot</a></td>
-                            <td>&#10007;</td>
-                            <td>&#10007;</td>
-                            <td>-</td>
-                            <td>gpt4o</td>
-                        </tr>
-                        <tr style="background-color: #ffb366;">
-                            <td><b>2</b></td>
-                            <td><b>37</b></td>
-                            <td><b>Salesforce Research DEIBASE-2</b></td>
-                            <td>&#10003;</td>
-                            <td>&#10003;</td>
-                            <td>&#10007;</td>
-                            <td>gpt4o</td>
-                        </tr>
-                        <tr style="background-color: #66cc66;">
-                            <td><b>Open</b></td>
-                            <td><b>34.3</b></td>
-                            <td><b>Salesforce Research DEI-Open</b></td>
-                            <td>&#10003;</td>
-                            <td>&#10003;</td>
-                            <td>&#10003;</td>
-                            <td>gpt4o</td>
-                        </tr>
-                        <tr>
-                            <td>-</td>
-                            <td>34.0</td>
-                            <td><a href="https://www.marscode.com/">Bytedance MarsCode</a></td>
-                            <td>&#10007;</td>
-                            <td>&#10007;</td>
-                            <td>-</td>
-                            <td>gpt4o</td>
-                        </tr>
-                        <tr>
-                            <td>-</td>
-                            <td>33.0</td>
-                            <td><a href="https://arxiv.org/abs/2406.01422">Alibaba Lingma</a></td>
-                            <td>&#10007;<sup>1</sup></td>
-                            <td>&#10007;</td>
-                            <td>-</td>
-                            <td>gpt-4-1106-preview</td>
-                        </tr>
-                        <tr style="background-color: #ffcc99;">
-                            <td>2</td>
-                            <td>31.3</td>
-                            <td><a href="https://www.factory.ai/">Factory Code Droid</a></td>
-                            <td>&#10007;</td>
-                            <td>&#10007;</td>
-                            <td>-</td>
-                            <td>Anthropic + OpenAI</td>
-                        </tr>
-                        <tr style="background-color: #ffcc99;">
-                            <td>2</td>
-                            <td>30.6</td>
-                            <td><a href="https://autocoderover.dev/">AutoCodeRover</a></td>
-                            <td>&#10007;<sup>2</sup></td>
-                            <td>&#10007;</td>
-                            <td>-</td>
-                            <td>gpt4o</td>
-                        </tr>
-                        <tr style="background-color: #ffcc99;">
-                            <td>2</td>
-                            <td>29.6</td>
-                            <td><a href="https://aws.amazon.com/q/developer/">Amazon Q Developer</a></td>
-                            <td>&#10007;</td>
-                            <td>&#10007;</td>
-                            <td>-</td>
-                            <td>Unknown</td>
-                        </tr>
-                        <tr style="background-color: #ffcc99;">
-                            <td>2</td>
-                            <td>28.3</td>
-                            <td><a href="https://github.com/NL2Code/CodeR">CodeR</a></td>
-                            <td>&#10007;<sup>1</sup></td>
-                            <td>&#10007;</td>
-                            <td>-</td>
-                            <td>gpt-4-1106-preview</td>
-                        </tr>
-                        <tr style="background-color: #ffcc99;">
-                            <td>2</td>
-                            <td>28.0</td>
-                            <td><a href="https://github.com/masai-dev-agent/masai">MASAI</a></td>
-                            <td>&#10007;<sup>1</sup></td>
-                            <td>&#10007;</td>
-                            <td>-</td>
-                            <td>Unknown</td>
-                        </tr>
-                        <tr>
-                            <td>-</td>
-                            <td>27.6</td>
-                            <td><a href="https://github.com/swe-bench/experiments/tree/main/evaluation/lite/20240706_sima_gpt4o">SIMA</a></td>
-                            <td>&#10007;<sup>1</sup></td>
-                            <td>&#10003;</td>
-                            <td>&#10003;<sup>3</sup></td>
-                            <td>gpt4o</td>
-                        </tr>
-                        <tr style="background-color: #ccffcc;">
-                            <td>Open</td>
-                            <td>27.3</td>
-                            <td><a href="https://github.com/OpenAutoCoder/Agentless">Agentless</a></td>
-                            <td>&#10003;</td>
-                            <td>&#10003;</td>
-                            <td>-</td>
-                            <td>gpt4o</td>
-                        </tr>
-                        <tr style="background-color: #ccffcc;">
-                            <td>Open</td>
-                            <td>26.6</td>
-                            <td><a href="https://github.com/aorwall/moatless-tools">Moatless Tools</a></td>
-                            <td>&#10003;</td>
-                            <td>&#10003;</td>
-                            <td>-</td>
-                            <td>Claude 3.5 Sonnet</td>
-                        </tr>
-                        <tr>
-                            <td>-</td>
-                            <td>26.6</td>
-                            <td><a href="https://github.com/swe-bench/experiments/tree/main/evaluation/lite/20240612_IBM_Research_Agent101">IBM Research Agent</a></td>
-                            <td>&#10007;</td>
-                            <td>&#10007;</td>
-                            <td>-</td>
-                            <td>Unknown</td>
-                        </tr>
-                        <tr style="background-color: #ccffcc;">
-                            <td>Open</td>
-                            <td>26.3</td>
-                            <td><a href="https://github.com/paul-gauthier/aider">Aider</a></td>
-                            <td>&#10003;</td>
-                            <td>&#10007;</td>
-                            <td>-</td>
-                            <td>gpt4o + Claude 3 Opus</td>
-                        </tr>
-                        <tr style="background-color: #ccffcc;">
-                            <td>Open</td>
-                            <td>26.0</td>
-                            <td><a href="https://docs.all-hands.dev/">OpenDevin + CodeAct</a></td>
-                            <td>&#10003;</td>
-                            <td>&#10003;</td>
-                            <td>-</td>
-                            <td>gpt4o</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <p></p>
-            <p>
-                <b>Note:</b>
-                <ul>
-                    <li><sup>1</sup> Their repo has no code yet.</li>
-                    <li><sup>2</sup> An earlier version is open-source. The current one is not.</li>
-                    <li><sup>3</sup> Candidates are generated by a "modification of moatless tools".</li>
-                </ul>
-            </p>
-        </div>
-    <div>
-        <p></p>
-    </div>
-    </div>
 
     <div class="row justify-content-md-center">
         <div class="col-md-12 col-lg-10">
@@ -495,24 +499,27 @@
         Based on the lessons we summarize above, we propose three <b>DEIBASE</b> groups in which each candidate is from a different agent and no more than 5 candidates exist for each instance. <b>DEIBASE-1</b> consists of the top 2 agents. <b>DEIBASE-2</b> consists of 5 closed-source agents that have high performance on the leaderboard. <b>DEIBASE-Open</b> consists of 4 open-source agents so that we know future researchers can run the entire pipeline.
     </p>
     <p class="text-justify">
-        We also evaluate <b>DEIBASE's</b> performance on these groups in <b>Table 1</b>. All three <b>DEIBASE</b> instances outperform the best candidate in the group. Surprisingly, <b>DEIBASE-Open</b> shows a 7% increase in resolve rates and beats most of the closed-source systems.
+        We also evaluate <b>DEIBASE's</b> performance on these groups in <b>the leaderboard results table</b>. All three <b>DEIBASE</b> instances outperform the best candidate in the group. Surprisingly, <b>DEIBASE-Open</b> shows a 7% increase in resolve rates and beats most of the closed-source systems.
     </p>
         </div>
     </div>
 
-<div class="row justify-content-md-center">
+    <div class="row justify-content-md-center">
             <div class="col-md-12 col-lg-10">
                 <h3>
                     Citation 
                 </h3>
-                <a href="https://arxiv.org/abs/2310.10625">[arxiv version]</a>
+                <a href="https://arxiv.org/abs/2408.07060">[arxiv version]</a>
                 <div class="form-group col-md-12">
                     <textarea id="bibtex" class="form-control" readonly>
-@article{du2023video,
-  title={Diversity Empowers Intelligence: Integrating Expertise of Software Engineering Agents},
-  author={xxxx},
-  journal={arXiv preprint arXiv:xxxx},
-  year={2024}
+@misc{zhang2024diversityempowersintelligenceintegrating,
+    title={Diversity Empowers Intelligence: Integrating Expertise of Software Engineering Agents}, 
+    author={Kexun Zhang and Weiran Yao and Zuxin Liu and Yihao Feng and Zhiwei Liu and Rithesh Murthy and Tian Lan and Lei Li and Renze Lou and Jiacheng Xu and Bo Pang and Yingbo Zhou and Shelby Heinecke and Silvio Savarese and Huan Wang and Caiming Xiong},
+    year={2024},
+    eprint={2408.07060},
+    archivePrefix={arXiv},
+    primaryClass={cs.SE},
+    url={https://arxiv.org/abs/2408.07060}, 
 }</textarea>
                 </div>
             </div>
